@@ -1,313 +1,387 @@
-var instance = new Mark(document.querySelector("color"));
+jQuery.extend({
+  highlight: function(node, re, nodeName, className) {
+    if (node.nodeType === 3) {
+      var match = node.data.match(re);
+      if (match) {
+        var highlight = document.createElement(nodeName || 'span');
+        highlight.className = className || 'highlight';
+        var wordNode = node.splitText(match.index);
+        wordNode.splitText(match[0].length);
+        var wordClone = wordNode.cloneNode(true);
+        highlight.appendChild(wordClone);
+        wordNode.parentNode.replaceChild(highlight, wordNode);
+        return 1; //skip added node in parent
+      }
+    } else if ((node.nodeType === 1 && node.childNodes) && // only element nodes that have children
+      !/(script|style)/i.test(node.tagName) && // ignore script and style nodes
+      !(node.tagName === nodeName.toUpperCase() && node.className === className)) { // skip if already highlighted
+      for (var i = 0; i < node.childNodes.length; i++) {
+        i += jQuery.highlight(node.childNodes[i], re, nodeName, className);
+      }
+    }
+    return 0;
+  }
+});
+jQuery.fn.unhighlight = function(options) {
+  var settings = {
+    className: 'highlight',
+    element: 'span'
+  };
+  jQuery.extend(settings, options);
+
+  return this.find(settings.element + "." + settings.className).each(function() {
+    var parent = this.parentNode;
+    parent.replaceChild(this.firstChild, this);
+    parent.normalize();
+  }).end();
+};
+
+jQuery.fn.highlight = function(words, options) {
+  var settings = {
+    className: 'highlight',
+    element: 'span',
+    caseSensitive: false,
+    wordsOnly: false
+  };
+  jQuery.extend(settings, options);
+
+  if (words.constructor === String) {
+    words = [words];
+  }
+  words = jQuery.grep(words, function(word, i) {
+    return word != '';
+  });
+  words = jQuery.map(words, function(word, i) {
+    return word.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+  });
+  if (words.length == 0) {
+    return this;
+  }
+  var flag = settings.caseSensitive ? "" : "i";
+  var pattern = "(" + words.join("|") + ")";
+  if (settings.wordsOnly) {
+    pattern = "\\b" + pattern + "\\b";
+  }
+  var re = new RegExp(pattern, flag);
+
+  return this.each(function() {
+    jQuery.highlight(this, re, settings.element, settings.className);
+  });
+};
 
 
-instance.mark("a", {
+runColors();
+
+function runColors(){
+$("color").highlight("a", {
   "element": "span",
   "className": "a",
   caseSensitive: true,
 });
-instance.mark("b", {
+$("color").highlight("b", {
   "element": "span",
   "className": "b",
   caseSensitive: true,
 });
-instance.mark("c", {
+$("color").highlight("c", {
   "element": "span",
   "className": "c",
   caseSensitive: true,
 });
-instance.mark("d", {
+$("color").highlight("d", {
   "element": "span",
   "className": "d",
   caseSensitive: true,
 });
-instance.mark("e", {
+$("color").highlight("e", {
   "element": "span",
   "className": "e",
   caseSensitive: true,
 });
-instance.mark("f", {
+$("color").highlight("f", {
   "element": "span",
   "className": "f",
   caseSensitive: true,
 });
-instance.mark("g", {
+$("color").highlight("g", {
   "element": "span",
   "className": "g",
   caseSensitive: true,
 });
-instance.mark("h", {
+$("color").highlight("h", {
   "element": "span",
   "className": "h",
   caseSensitive: true,
 });
-instance.mark("i", {
+$("color").highlight("i", {
   "element": "span",
   "className": "i",
   caseSensitive: true,
 });
-instance.mark("j", {
+$("color").highlight("j", {
   "element": "span",
   "className": "j",
   caseSensitive: true,
 });
-instance.mark("k", {
+$("color").highlight("k", {
   "element": "span",
   "className": "k",
   caseSensitive: true,
 });
-instance.mark("l", {
+$("color").highlight("l", {
   "element": "span",
   "className": "l",
   caseSensitive: true,
 });
-instance.mark("m", {
+$("color").highlight("m", {
   "element": "span",
   "className": "m",
   caseSensitive: true,
 });
-instance.mark("n", {
+$("color").highlight("n", {
   "element": "span",
   "className": "n",
   caseSensitive: true,
 });
-instance.mark("o", {
+$("color").highlight("o", {
   "element": "span",
   "className": "o",
   caseSensitive: true,
 });
-instance.mark("p", {
+$("color").highlight("p", {
   "element": "span",
   "className": "p",
   caseSensitive: true,
 });
-instance.mark("q", {
+$("color").highlight("q", {
   "element": "span",
   "className": "q",
   caseSensitive: true,
 });
-instance.mark("r", {
+$("color").highlight("r", {
   "element": "span",
   "className": "r",
   caseSensitive: true,
 });
-instance.mark("s", {
+$("color").highlight("s", {
   "element": "span",
   "className": "s",
   caseSensitive: true,
 });
-instance.mark("t", {
+$("color").highlight("t", {
   "element": "span",
   "className": "t",
   caseSensitive: true,
 });
-instance.mark("u", {
+$("color").highlight("u", {
   "element": "span",
   "className": "u",
   caseSensitive: true,
 });
-instance.mark("v", {
+$("color").highlight("v", {
   "element": "span",
   "className": "v",
   caseSensitive: true,
 });
-instance.mark("w", {
+$("color").highlight("w", {
   "element": "span",
   "className": "w",
   caseSensitive: true,
 });
-instance.mark("x", {
+$("color").highlight("x", {
   "element": "span",
   "className": "x",
   caseSensitive: true,
 });
-instance.mark("y", {
+$("color").highlight("y", {
   "element": "span",
   "className": "y",
   caseSensitive: true,
 });
-instance.mark("z", {
+$("color").highlight("z", {
   "element": "span",
   "className": "z",
   caseSensitive: true,
 });
-instance.mark("A", {
+$("color").highlight("A", {
   "element": "span",
   "className": "A",
   caseSensitive: true,
 });
-instance.mark("B", {
+$("color").highlight("B", {
   "element": "span",
   "className": "B",
   caseSensitive: true,
 });
-instance.mark("C", {
+$("color").highlight("C", {
   "element": "span",
   "className": "C",
   caseSensitive: true,
 });
-instance.mark("D", {
+$("color").highlight("D", {
   "element": "span",
   "className": "D",
   caseSensitive: true,
 });
-instance.mark("E", {
+$("color").highlight("E", {
   "element": "span",
   "className": "E",
   caseSensitive: true,
 });
-instance.mark("F", {
+$("color").highlight("F", {
   "element": "span",
   "className": "F",
   caseSensitive: true,
 });
-instance.mark("G", {
+$("color").highlight("G", {
   "element": "span",
   "className": "G",
   caseSensitive: true,
 });
-instance.mark("H", {
+$("color").highlight("H", {
   "element": "span",
   "className": "H",
   caseSensitive: true,
 });
-instance.mark("I", {
+$("color").highlight("I", {
   "element": "span",
   "className": "I",
   caseSensitive: true,
 });
-instance.mark("J", {
+$("color").highlight("J", {
   "element": "span",
   "className": "J",
   caseSensitive: true,
 });
-instance.mark("K", {
+$("color").highlight("K", {
   "element": "span",
   "className": "K",
   caseSensitive: true,
 });
-instance.mark("L", {
+$("color").highlight("L", {
   "element": "span",
   "className": "L",
   caseSensitive: true,
 });
-instance.mark("M", {
+$("color").highlight("M", {
   "element": "span",
   "className": "M",
   caseSensitive: true,
 });
-instance.mark("N", {
+$("color").highlight("N", {
   "element": "span",
   "className": "N",
   caseSensitive: true,
 });
-instance.mark("O", {
+$("color").highlight("O", {
   "element": "span",
   "className": "O",
   caseSensitive: true,
 });
-instance.mark("P", {
+$("color").highlight("P", {
   "element": "span",
   "className": "P",
   caseSensitive: true,
 });
-instance.mark("Q", {
+$("color").highlight("Q", {
   "element": "span",
   "className": "Q",
   caseSensitive: true,
 });
-instance.mark("R", {
+$("color").highlight("R", {
   "element": "span",
   "className": "R",
   caseSensitive: true,
 });
-instance.mark("S", {
+$("color").highlight("S", {
   "element": "span",
   "className": "S",
   caseSensitive: true,
 });
-instance.mark("T", {
+$("color").highlight("T", {
   "element": "span",
   "className": "T",
   caseSensitive: true,
 });
-instance.mark("U", {
+$("color").highlight("U", {
   "element": "span",
   "className": "U",
   caseSensitive: true,
 });
-instance.mark("V", {
+$("color").highlight("V", {
   "element": "span",
   "className": "V",
   caseSensitive: true,
 });
-instance.mark("W", {
+$("color").highlight("W", {
   "element": "span",
   "className": "W",
   caseSensitive: true,
 });
-instance.mark("X", {
+$("color").highlight("X", {
   "element": "span",
   "className": "X",
   caseSensitive: true,
 });
-instance.mark("Y", {
+$("color").highlight("Y", {
   "element": "span",
   "className": "Y",
   caseSensitive: true,
 });
-instance.mark("Z", {
+$("color").highlight("Z", {
   "element": "span",
   "className": "Z",
   caseSensitive: true,
 });
-instance.mark("1", {
+$("color").highlight("1", {
   "element": "span",
   "className": "_1",
   caseSensitive: true,
 });
-instance.mark("2", {
+$("color").highlight("2", {
   "element": "span",
   "className": "_2",
   caseSensitive: true,
 });
-instance.mark("3", {
+$("color").highlight("3", {
   "element": "span",
   "className": "_3",
   caseSensitive: true,
 });
-instance.mark("4", {
+$("color").highlight("4", {
   "element": "span",
   "className": "_4",
   caseSensitive: true,
 });
-instance.mark("5", {
+$("color").highlight("5", {
   "element": "span",
   "className": "_5",
   caseSensitive: true,
 });
-instance.mark("6", {
+$("color").highlight("6", {
   "element": "span",
   "className": "_6",
   caseSensitive: true,
 });
-instance.mark("7", {
+$("color").highlight("7", {
   "element": "span",
   "className": "_7",
   caseSensitive: true,
 });
-instance.mark("8", {
+$("color").highlight("8", {
   "element": "span",
   "className": "_8",
   caseSensitive: true,
 });
-instance.mark("9", {
+$("color").highlight("9", {
   "element": "span",
   "className": "_9",
   caseSensitive: true,
 });
-instance.mark("0", {
+$("color").highlight("0", {
   "element": "span",
   "className": "_0",
   caseSensitive: true,
 });
+
+}
