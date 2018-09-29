@@ -1,23 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-  <head>
-    <meta charset="utf-8">
-    <title>Grapheme Typer</title>
-    <meta name="description" content="Display text with colored text.">
-    <meta name="Carlos Vega" content="Demo">
-    <!-- This file is for changing font colors-->
-    <link rel="stylesheet" href="graphemeStyles.css?v=1.0">
-    <!-- optionsal GoogleFonts-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=greek-ext,latin-ext" rel="stylesheet">
-		
-		<style>
-		  color.span {
+<head>
+  <meta charset="utf-8">
+  <title>Grapheme Typer</title>
+  <meta content="Display text with colored text." name="description">
+  <meta content="Demo" name="Carlos Vega"><!-- This file is for changing font colors-->
+  <link href="https://raw.githubusercontent.com/CarlosVegaMe/GraphemeTyper/master/graphemeStyles.css" rel="stylesheet"><!-- optionsal GoogleFonts-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=greek-ext,latin-ext" rel="stylesheet">
+  <style>
+          color.span {
     font-size: 2em;
     padding: 0.5em;
     background-color: #20262e;
   }
-	
+
   color.span {
     display: block;
     margin: 0em -30em 0em -30em;
@@ -35,30 +31,18 @@
     text-rendering: optimizeLegibility;
   }
 
-</style>
-  </head>
-
-
-  <body>
-
-    <h1>
-      Grapheme Typer
-    </h1> 
-    <h3>
-      Grapheme syntax using 
-      <color>mark.js</color>, slim.js.
-	    
-	          <color>the tag</color> may only work once for now.
-
-    </h3>
-<!-- This makes it all possible..  -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- this will load MarkJS.  -->
-    <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.js"></script>
-    <!-- this will load custom settings to change colored text..  -->
-    <script src="graphemeScripts.js"></script>
-
-
-  </body>
-
+  </style>
+</head>
+<body>
+  <h1>Grapheme Typer</h1>
+  <h3>Grapheme syntax using mark.js, slim.js.</h3><!-- This makes it all possible..  -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+  </script> <!-- this will load MarkJS.  -->
+   
+  <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.js">
+  </script> <!-- this will load custom settings to change colored text..  -->
+   
+  <script src="https://raw.githubusercontent.com/CarlosVegaMe/GraphemeTyper/master/graphemeScripts.js">
+  </script>
+</body>
 </html>
